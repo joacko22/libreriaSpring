@@ -13,8 +13,8 @@
 </head>
 <body>
 <form th:action="@{/Autor/modificar/__${Autor.id}__}" method="post">
-<label for="validationName" class="form-label">Nombre</label>modificar nombre <input
-			type="text" th:text="${Autor.nombre}" class="form-control" name="nombre">
+<label for="validationName" class="form-label">Modificar Nombre</label><input
+			type="text" th:value="${Autor.nombre}" class="form-control" name="nombre">
 		<button class="btn btn-success" type="submit">Guardar</button>
 
 </form>

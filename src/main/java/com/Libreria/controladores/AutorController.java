@@ -23,10 +23,10 @@ public class AutorController {
 	@GetMapping("/lista")
 	public String listAutores(ModelMap modelo) {
 		List<Autor> autores = autorService.listarTodos();
-		modelo.addAttribute("autores",autores);
+		modelo.addAttribute("autores", autores);
 		return "list-Autor";
 	}
-	
+
 	@GetMapping("/registro")
 	public String formulario() {
 		return "form-Autor";
@@ -35,7 +35,7 @@ public class AutorController {
 	@PostMapping("/registro")
 	public String guardar(ModelMap modelo, @RequestParam String nombre) {
 
-		try { 
+		try {
 			autorService.guardar(nombre);
 			modelo.put("exito", "Registro exitoso");
 			return "redirect:/Autor";
@@ -44,39 +44,44 @@ public class AutorController {
 			return "form-Autor";
 		}
 	}
+
 	@GetMapping("/modificar/{id}")
-	public String modifica(ModelMap modelo,@PathVariable String id){
-		
-		autorService.encontrarID(id);
-		modelo.addAttribute(id);
-		return "modificar-autor";
-	}	
-	
-	@PostMapping("/modificar/{id}")
-	public String modificar(@PathVariable String id,@RequestParam String nombre) {
+	public String modifica(ModelMap modelo, @PathVariable String id) throws Exception {
 		try {
-			autorService.modificar(id,nombre);
+			modelo.addAttribute("Autor", autorService.obtenerID(id));
 			return "modificar-autor";
 		} catch (Exception e) {
-			return "redirect:/";
+			return "redirect:/Autor";
 		}
-		
+
 	}
-	
-	@GetMapping("/eliminar/{id}")
-	public String eliminar(ModelMap modelo,@PathVariable String id){
+
+	@PostMapping("/modificar/{id}")
+	public String modificar(@PathVariable String id, @RequestParam String nombre) {
 		try {
-			autorService.eliminar(id);
-			modelo.put("exito","autor eliminado");
+			autorService.modificar(id,nombre);
 			return "redirect:/Autor/lista";
 		} catch (Exception e) {
 			return "redirect:/";
 		}
-		
+
 	}
+
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(ModelMap modelo, @PathVariable String id) {
+		try {
+			autorService.eliminar(id);
+			modelo.put("exito", "autor eliminado");
+			return "redirect:/Autor/lista";
+		} catch (Exception e) {
+			return "redirect:/";
+		}
+
+	}
+
 	@GetMapping("/baja/{id}")
 	public String baja(@PathVariable String id) {
-				
+
 		try {
 			autorService.baja(id);
 			return "redirect:/Autor/lista";
@@ -84,9 +89,10 @@ public class AutorController {
 			return "redirect:/";
 		}
 	}
+
 	@GetMapping("/alta/{id}")
 	public String alta(@PathVariable String id) {
-				
+
 		try {
 			autorService.alta(id);
 			return "redirect:/Autor/lista";
