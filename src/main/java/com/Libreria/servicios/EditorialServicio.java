@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.Libreria.Repository.EditorialRepository;
-
 import com.Libreria.entidades.Editorial;
 
 import antlr.collections.List;
@@ -21,14 +20,25 @@ public class EditorialServicio {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Editorial guardar(String nombre) throws Exception {
 		if (nombre.isBlank() || nombre.isEmpty()) {
-			throw new Exception("el Autor requiere un nombre");
+			throw new Exception("La Editorial requiere un nombre");
 		}
 		Editorial edit = new Editorial();
 		edit.setNombre(nombre);
 		edit.setAlta(true);
 		return EditRepo.save(edit);
 	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Editorial obtenerID(String id) throws Exception {
+		Optional<Editorial> respuesta = EditRepo.findById(id);// creamos un optional para validar si existe un autor por id
+		if (respuesta.isPresent()) {
 
+			Editorial edit = respuesta.get();// creamos un autor y lo traemos
+			
+			return edit;// aca mandamos al repositorio nuestra entidad y resultado
+		} else {
+			throw new Exception("no existe una Editorial con ese id o nombre");
+		}
+	}
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Editorial modificar(String id, String nombre) throws Exception {
 		if (nombre.isBlank() || nombre.isEmpty()) {
@@ -42,7 +52,7 @@ public class EditorialServicio {
 
 			return EditRepo.save(edit);// aca mandamos al repositorio nuestra entidad y resultado
 		} else {
-			throw new Exception("no existe un Autor con ese id o nombre");
+			throw new Exception("no existe una Editorial con ese id o nombre");
 		}
 	}
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })

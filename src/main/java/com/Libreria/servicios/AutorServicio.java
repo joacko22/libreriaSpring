@@ -22,7 +22,7 @@ public class AutorServicio {
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Autor guardar(String nombre) throws Exception {
-		if (nombre.isBlank() || nombre.isEmpty()) {
+		if (nombre.contains(" ") || nombre.isEmpty() || nombre==null) {
 			throw new Exception("el Autor requiere un nombre");
 		}
 		Autor autor = new Autor();
@@ -35,7 +35,7 @@ public class AutorServicio {
 		Optional<Autor> respuesta = autorRepo.findById(id);// creamos un optional para validar si existe un autor por id
 		if (respuesta.isPresent()) {
 
-			Autor au = respuesta.get();// en caso de que exista un id con ese autor lo trae
+			Autor au = respuesta.get();// creamos un autor y lo traemos
 			
 			return au;// aca mandamos al repositorio nuestra entidad y resultado
 		} else {

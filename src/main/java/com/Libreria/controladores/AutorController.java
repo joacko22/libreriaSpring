@@ -38,15 +38,16 @@ public class AutorController {
 		try {
 			autorService.guardar(nombre);
 			modelo.put("exito", "Registro exitoso");
-			return "redirect:/Autor";
+			return "redirect:/Autor/lista";
 		} catch (Exception e) {
 			modelo.put("error", "falto algun dato");
+	
 			return "form-Autor";
 		}
 	}
 
 	@GetMapping("/modificar/{id}")
-	public String modifica(ModelMap modelo, @PathVariable String id) throws Exception {
+	public String traerAutor(ModelMap modelo, @PathVariable String id) throws Exception {
 		try {
 			modelo.addAttribute("Autor", autorService.obtenerID(id));
 			return "modificar-autor";

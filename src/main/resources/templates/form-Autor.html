@@ -20,24 +20,26 @@
 
 <style>
 .gradient-custom {
-
-    background: #6a11cb;
-  
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  
-  
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-  }
+	background: #6a11cb;
+	background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1),
+		rgba(37, 117, 252, 1));
+	background: linear-gradient(to right, rgba(106, 17, 203, 1),
+		rgba(37, 117, 252, 1))
+}
 </style>
 <title>Formulario de Autor</title>
 </head>
 <body>
 
 	<section class="vh-100 gradient-custom">
+		<!-- container -->
 		<div class="container py-5 h-100">
+			<!-- elementos, row y flex y contenido centrado -->
 			<div
 				class="row d-flex justify-content-center align-items-center h-100">
+				<!-- columnas del login espacio -->
 				<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+					<!-- card -->
 					<div class="card bg-dark text-white" style="border-radius: 1rem;">
 						<div class="card-body p-5 text-center">
 
@@ -47,11 +49,27 @@
 								<h2 class="fw-bold mb-2 text-uppercase">Autor</h2>
 								<p class="text-white-50 mb-5">Ingrese un Autor</p>
 								
+								<div th:if="${exito}!=null"
+									class="card text-white bg-success mb-3">
+									<div class="card-body">
+										<h5 class="card-title">Exito</h5>
+										<p class="card-text" th:text="${exito}"></p>
+									</div>
+								</div>
+								<div th:if="${error}!=null"
+									class="card text-white bg-danger mb-3">
+									<div class="card-body">
+										<h5 class="card-title">Error</h5>
+										<p class="card-text" th:text="${error}"></p>
+									</div>
+								</div>
+								
+								<!-- formulario -->
 								<form th:action="@{/Autor/registro}" method="post">
 									<div class="form-outline form-white mb-4">
-										<input type="name" id="typeEmailX"
+										<input type="text" name="nombre"
 											class="form-control form-control-lg" /> <label
-											class="form-label" for="typeEmailX">nombre</label>
+											class="form-label">nombre</label>
 									</div>
 
 
