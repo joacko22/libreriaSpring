@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+	crossorigin="anonymous">
+<title>Insert title here</title>
+
+</head>
+<body>
+<form th:action="@{/Edtorial/modificar/__${edit.id}__}" method="post">
+<label for="validationName" class="form-label">Modificar Nombre</label><input
+			type="text" th:value="${edit.nombre}" class="form-control" name="nombre">
+		<button class="btn btn-success" type="submit">Guardar</button>
+
+</form>
+</body>
+</html>

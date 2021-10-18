@@ -27,13 +27,13 @@
 		rgba(37, 117, 252, 1))
 }
 </style>
-<title>Formulario de Autor</title>
+<title>Formulario de Libro</title>
 </head>
 <body>
 
-
+	<section class="vh-100 gradient-custom">
 		<!-- container -->
-		<div class="container py-5 h-100 gradient-custom">
+		<div class="container py-5 h-100">
 			<!-- elementos, row y flex y contenido centrado -->
 			<div
 				class="row d-flex justify-content-center align-items-center h-100">
@@ -46,9 +46,9 @@
 
 							<div class="mb-md-5 mt-md-4 pb-5">
 
-								<h2 class="fw-bold mb-2 text-uppercase">Autor</h2>
-								<p class="text-white-50 mb-5">Ingrese un Autor</p>
-								
+								<h2 class="fw-bold mb-2 text-uppercase">Libro</h2>
+								<p class="text-white-50 mb-5">Ingrese el Libro</p>
+
 								<div th:if="${exito}!=null"
 									class="card text-white bg-success mb-3">
 									<div class="card-body">
@@ -63,36 +63,67 @@
 										<p class="card-text" th:text="${error}"></p>
 									</div>
 								</div>
-								
-								<!-- formulario -->
-								<form th:action="@{/Autor/registro}" method="post">
-									<div class="form-outline form-white mb-4">
-										<input type="text" name="nombre"
-											class="form-control form-control-lg" /> <label
-											class="form-label">nombre</label>
-									</div>
 
+								<!-- formulario -->
+								<form th:action="@{/libros/registro}" method="post">
+									<div class="form-outline form-white mb-4">
+										<input type="text" name="titulo"
+											class="form-control form-control-lg" /> <label
+											class="form-label">titulo</label>
+									</div>
+									<div class="form-outline form-white mb-4">
+										<input type="date" name="anio"
+											class="form-control form-control-lg" /> <label
+											class="form-label">Anio</label>
+									</div>
+									<div class="form-outline form-white mb-4">
+										<input type="number" name="ejemplares"
+											class="form-control form-control-lg" /> <label
+											class="form-label">ejemplares</label>
+									</div>
+									<div class="form-outline form-white mb-4">
+										<input type="number" name="ejemplaresP"
+											class="form-control form-control-lg" /> <label
+											class="form-label">ejemplares Prestados</label>
+									</div>
+									<div class="form-outline form-white mb-4">
+										<input type="number" name="ejemplaresR"
+											class="form-control form-control-lg" /> <label
+											class="form-label">ejemplares Restantes</label>
+									</div>
+									<div class="form-outline form-white mb-4">
+										<select class="form-control form-control-lg" name="autor">
+											<option th:each="autor : ${autores}" th:value="${autor.id}"
+												th:text="${autor.nombre}">
+										</select>
+									</div>
+									<div class="form-outline form-white mb-4">
+										<select class="form-control form-control-lg" name="edit">
+											<option th:each="edit : ${editoriales}" th:value="${edit.id}"
+												th:text="${edit.nombre}">
+										</select>
+									</div>
 
 
 									<button class="btn btn-outline-light btn-lg px-5" type="submit">guardar</button>
 								</form>
-								<div class="d-flex justify-content-center text-center mt-4 pt-1">
-									<a href="www.facebook.com/" class="text-white"><i
-										class="fab fa-facebook-f fa-lg"></i></a> <a
-										href="www.linkedin.com/in/joaquin-baldellou-2735801a0/"
-										class="text-white"><i
-										class="fab fa-linkedin-in fa-lg mx-4 px-2"></i></a>
-
-								</div>
+							</div>
+							<div class="d-flex justify-content-center text-center mt-4 pt-1">
+								<a href="www.facebook.com/" class="text-white"><i
+									class="fab fa-facebook-f fa-lg"></i></a> <a
+									href="www.linkedin.com/in/joaquin-baldellou-2735801a0/"
+									class="text-white"><i
+									class="fab fa-linkedin-in fa-lg mx-4 px-2"></i></a>
 
 							</div>
 
-
 						</div>
+
+
 					</div>
 				</div>
 			</div>
 		</div>
-	
+	</section>
 </body>
 </html>

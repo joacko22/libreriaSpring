@@ -1,5 +1,7 @@
 package com.Libreria.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,13 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Libreria.entidades.Editorial;
 import com.Libreria.servicios.EditorialServicio;
 @Controller
 @RequestMapping("/Editorial")
 public class EditorialController {
 	@Autowired
 	private EditorialServicio editService;
-
+	@GetMapping()
+	public String listEditorial(ModelMap modelo) {
+		List<Editorial> editoriales = editService.listarTodos();
+		modelo.addAttribute("editoriales",editoriales );
+		return "list-Editorial";
+	}
 	@GetMapping("/registro")
 	public String formulario() {
 		return "form-Editorial";

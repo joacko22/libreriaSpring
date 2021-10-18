@@ -1,5 +1,6 @@
 package com.Libreria.servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.Libreria.Repository.EditorialRepository;
 import com.Libreria.entidades.Editorial;
 
-import antlr.collections.List;
+
 @Service
 public class EditorialServicio {
 	@Autowired
@@ -97,13 +98,10 @@ public class EditorialServicio {
 		}
 	}
 
-	@Transactional (readOnly=true)
-	public List listarActivos(){
-		return EditRepo.listarActivos();
-	}
+	
 	@Transactional(readOnly = true)
-	public List listarTodos() {
-		return (List) EditRepo.findAll();
+	public List<Editorial> listarTodos() {
+		return  EditRepo.findAll();
 	}
 }
 
