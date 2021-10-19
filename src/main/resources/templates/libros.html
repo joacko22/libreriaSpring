@@ -20,6 +20,8 @@
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous" />
+	
+	<link rel="stylesheet" href="/styles.css">
 <title>Libros</title>
 </head>
 <body>
@@ -35,25 +37,32 @@
 				<th scope="col">Autor</th>
 
 				<th scope="col">Editorial</th>
+				<th scope="col">Editar libro</th>
+				<th scope="col">Eliminar libro</th>
 			</tr>
 			<!-- COLUMNAS -->
-			<tbody th:each="libro : ${libros}">
+			<tbody th:each="libro : ${libros}" >
 				<tr>
 					<th scope="row" th:text="${libro.id}"></th>
 					<td th:text="${libro.titulo}"></td>
+					<td th:text="${libro.anio}"></td>
+					
+						<td th:text="${libro.autor.nombre}"></td>
+					<td th:text="${libro.editorial.nombre}"></td>
+		
 
-
-					<td><a th:href="@{/Autor/actualizar/__${libro.id}__}"
-						class="btn btn-warning">Editar</a></td>
-					<td><a th:href="@{/Autor/eliminar/__${libro.id}__}"
-						class="btn btn-danger">Eliminar</a></td>
+				<td><a th:href="@{/libros/actualizar/__${libro.id}__}"
+					class="btn btn-warning">Editar</a></td>
+				<td><a th:href="@{/libros/eliminar/__${libro.id}__}"
+					class="btn btn-danger">Eliminar</a></td>
 				</tr>
 
 			</tbody>
 
 		</table>
-		<div >
-		<a th:href="@{/libros/registro}" class="btn btn-secondary">para agregar un libro</a>
+		<div>
+			<a th:href="@{/libros/registro}" class="btn btn-secondary">para
+				agregar un libro</a>
 		</div>
 		<a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
 

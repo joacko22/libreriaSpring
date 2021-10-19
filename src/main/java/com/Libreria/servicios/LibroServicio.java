@@ -26,18 +26,18 @@ public class LibroServicio {
 	private LibroRepository libroRepository;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Libro guardar(String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados,
-			Integer ejemplaresRestantes, String autorID, String editorialID) throws Exception {
+	public Libro guardar(String titulo, Integer anio, Integer ejemplares, String autorID, String editorialID)
+			throws Exception {
 		try {
-			validar(titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, autorID, editorialID);
+			validar(titulo, anio, ejemplares, autorID, editorialID);
 			Autor autor = autorService.obtenerID(autorID);
 			Editorial editorial = editorialService.obtenerID(editorialID);
 			Libro libro = new Libro();
 			libro.setTitulo(titulo);
 			libro.setAnio(anio);
 			libro.setEjemplares(ejemplares);
-			libro.setEjemplaresPrestados(ejemplaresPrestados);
-			libro.setEjemplaresRestantes(ejemplaresRestantes);
+			libro.setEjemplaresPrestados(0);
+			libro.setEjemplaresRestantes(ejemplares);
 			libro.setAutor(autor);
 			libro.setEditorial(editorial);
 			return libroRepository.save(libro);
@@ -49,18 +49,18 @@ public class LibroServicio {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Libro update(String id, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados,
-			Integer ejemplaresRestantes, String autorID, String editorialID) throws Exception {
+	public Libro update(String id, String titulo, Integer anio, Integer ejemplares, String autorID, String editorialID)
+			throws Exception {
 		try {
-			validar(titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, autorID, editorialID);
+			validar(titulo, anio, ejemplares, autorID, editorialID);
 			Autor autor = autorService.obtenerID(autorID);
 			Editorial editorial = editorialService.obtenerID(editorialID);
 			Libro libro = obtenerID(id);
 			libro.setTitulo(titulo);
 			libro.setAnio(anio);
 			libro.setEjemplares(ejemplares);
-			libro.setEjemplaresPrestados(ejemplaresPrestados);
-			libro.setEjemplaresRestantes(ejemplaresRestantes);
+			libro.setEjemplaresPrestados(0);
+			libro.setEjemplaresRestantes(ejemplares);
 			libro.setAutor(autor);
 			libro.setEditorial(editorial);
 			return libroRepository.save(libro);
@@ -110,8 +110,8 @@ public class LibroServicio {
 		}
 	}
 
-	public void validar(String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados,
-			Integer ejemplaresRestantes, String autorID, String editorialID) throws Exception {
+	public void validar(String titulo, Integer anio, Integer ejemplares, String autorID, String editorialID)
+			throws Exception {
 		if (titulo.contains(" ") || titulo.isEmpty()) {
 			throw new Exception("el titulo requiere un nombre");
 		}
@@ -120,12 +120,8 @@ public class LibroServicio {
 		}
 		if (ejemplares.equals(0) || ejemplares.equals(" ")) {
 			throw new Exception("faltan ejemplares");
-		}if (ejemplaresPrestados.equals(0) || ejemplaresPrestados.equals(" ")) {
-			throw new Exception("falta llenar el campo o no puede ser 0");
 		}
-		if (ejemplaresRestantes.equals(0) || ejemplaresRestantes.equals(" ")) {
-			throw new Exception("falta llenar el campo o no puede ser 0");
-		}
+
 		if (autorID.contains(" ") || autorID.isEmpty()) {
 			throw new Exception("no se encontro el autor");
 		}
@@ -133,9 +129,5 @@ public class LibroServicio {
 			throw new Exception("no se encontro la editorial");
 		}
 	}
-	
-	
-	
-	
-	
+
 }

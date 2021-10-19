@@ -18,15 +18,7 @@
 	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
 	crossorigin="anonymous">
 
-<style>
-.gradient-custom {
-	background: #6a11cb;
-	background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1),
-		rgba(37, 117, 252, 1));
-	background: linear-gradient(to right, rgba(106, 17, 203, 1),
-		rgba(37, 117, 252, 1))
-}
-</style>
+<link rel="stylesheet" href="/styles.css">
 <title>Formulario de Libro</title>
 </head>
 <body>
@@ -72,7 +64,7 @@
 											class="form-label">titulo</label>
 									</div>
 									<div class="form-outline form-white mb-4">
-										<input type="date" name="anio"
+										<input type="number" name="anio"
 											class="form-control form-control-lg" /> <label
 											class="form-label">Anio</label>
 									</div>
@@ -81,27 +73,19 @@
 											class="form-control form-control-lg" /> <label
 											class="form-label">ejemplares</label>
 									</div>
+
 									<div class="form-outline form-white mb-4">
-										<input type="number" name="ejemplaresP"
-											class="form-control form-control-lg" /> <label
-											class="form-label">ejemplares Prestados</label>
-									</div>
-									<div class="form-outline form-white mb-4">
-										<input type="number" name="ejemplaresR"
-											class="form-control form-control-lg" /> <label
-											class="form-label">ejemplares Restantes</label>
-									</div>
-									<div class="form-outline form-white mb-4">
-										<select class="form-control form-control-lg" name="autor">
+										<select class="form-control form-control-lg" name="autorID">
 											<option th:each="autor : ${autores}" th:value="${autor.id}"
 												th:text="${autor.nombre}">
-										</select>
+										</select> <label class="form-label">Autores</label>
 									</div>
 									<div class="form-outline form-white mb-4">
-										<select class="form-control form-control-lg" name="edit">
+										<select class="form-control form-control-lg"
+											name="editorialID">
 											<option th:each="edit : ${editoriales}" th:value="${edit.id}"
 												th:text="${edit.nombre}">
-										</select>
+										</select> <label class="form-label">Editoriales</label>
 									</div>
 
 

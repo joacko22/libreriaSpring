@@ -42,6 +42,33 @@ public class EditorialController {
 		}
 		
 	}
+	@GetMapping("/modificar/{id}")
+	public String obtenerID(ModelMap model,@PathVariable String id) {
+		try {
+			model.addAttribute("edit",editService.obtenerID(id));
+			return "modificar-edit";
+		} catch (Exception e) {
+			return "/";
+		}
+	}
+	@PostMapping("/modificar/{id}")
+	public String modificar(@PathVariable String id,@RequestParam String nombre) {
+		try {
+			editService.modificar(id, nombre);
+			return "redirect:/Editorial/list-Editorial";
+		} catch (Exception e) {
+		return "/Editorial/list-Editorial";
+		}
+	}
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable String id) {
+		try {
+			editService.eliminar(id);
+			return"list-Editorial";
+		} catch (Exception e) {
+			return"list-Editorial";
+		}
+	}
 	@GetMapping("/baja/{id}")
 	public String baja(@PathVariable String id) {
 				

@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<form th:action="@{/Edtorial/modificar/__${edit.id}__}" method="post">
+<form th:action="@{/Editorial/modificar/__${edit.id}__}" method="post">
 <label for="validationName" class="form-label">Modificar Nombre</label><input
 			type="text" th:value="${edit.nombre}" class="form-control" name="nombre">
 		<button class="btn btn-success" type="submit">Guardar</button>

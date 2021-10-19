@@ -49,10 +49,9 @@ public class LibroController {
 
 	@PostMapping("/registro")
 	public String registrar(ModelMap model, @RequestParam String titulo, @RequestParam Integer anio,
-			@RequestParam Integer ejemplares, @RequestParam Integer ejemplaresP, @RequestParam Integer ejemplaresR,
-			@RequestParam String autorID, @RequestParam String editorialID) {
+			@RequestParam Integer ejemplares, @RequestParam String autorID, @RequestParam String editorialID) {
 		try {
-			libroService.guardar(titulo, anio, ejemplares, ejemplaresP, ejemplaresR, autorID, editorialID);
+			libroService.guardar(titulo, anio, ejemplares, autorID, editorialID);
 			model.put("exito", "libro guardado con exito");
 			return "form-libro";
 		} catch (Exception e) {
@@ -74,10 +73,10 @@ public class LibroController {
 
 	@PostMapping("/actualizar/{id}")
 	public String actualizar(ModelMap model, @RequestParam String id, @RequestParam String titulo,
-			@RequestParam Integer anio, @RequestParam Integer ejemplaresP, @RequestParam Integer ejemplaresR,
-			@RequestParam String autorID, @RequestParam String editorialID) {
+			@RequestParam Integer anio, @RequestParam Integer ejemplares, @RequestParam String autorID,
+			@RequestParam String editorialID) {
 		try {
-			libroService.update(id, titulo, anio, ejemplaresR, ejemplaresP, ejemplaresR, autorID, editorialID);
+			libroService.update(id, titulo, anio, ejemplares, autorID, editorialID);
 			model.put("exito", "libro actualizado con exito");
 			return "actualizar-libro";
 		} catch (Exception e) {
